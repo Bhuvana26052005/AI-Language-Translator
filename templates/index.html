@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Translator - CodeAlpha</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #37c4ee;
+            margin: 0;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 { color: #373839; margin-bottom: 5px; }
+        p { color: #373839; margin-bottom: 30px; font-size: 16px; }
+        .wrapper {
+            display: flex;
+            width: 900px;
+            background: #e2dfea;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .pane {
+            flex: 1;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+        .pane:first-child { border-right: 1px solid #8c4a4a; }
+        label { font-weight: bold; margin-bottom: 8px; color: #0b0c0c; }
+        textarea {
+            height: 180px;
+            padding: 12px;
+            border: 1px solid #7e93bf;
+            border-radius: 4px;
+            font-size: 16px;s
+            resize: none;
+            box-sizing: border-box;
+        }
+        select, button {
+            margin-top: 15px;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        select {
+            border: 1px solid #dadce0;
+            background-color: white;
+        }
+        button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        button:hover { background-color: #0f57b3; }
+        .footer { margin-top: 25px; font-size: 12px; color: #70757a; }
+    </style>
+</head>
+<body>
+
+    <h1>🌐 AI Language Translation Tool</h1>
+    <p>CodeAlpha Internship Project - Task 1 Web App</p>
+
+    <div class="wrapper">
+        <div class="pane">
+            <label for="user_text">Source Text (Auto-Detects Input Language):</label>
+            <form action="/translate" method="POST">
+                <textarea id="user_text" name="user_text" placeholder="Type something to translate...">{{ original }}</textarea>
+                
+                <label style="margin-top: 15px; display: block;">Translate To:</label>
+                <select name="target_language" style="width: 100%;">
+                    <option value="es" {% if lang == 'es' %}selected{% endif %}>Spanish (Español)</option>
+                    <option value="fr" {% if lang == 'fr' %}selected{% endif %}>French (Français)</option>
+                    <option value="de" {% if lang == 'de' %}selected{% endif %}>German (Deutsch)</option>
+                    <option value="hi" {% if lang == 'hi' %}selected{% endif %}>Hindi (हिन्दी)</option>
+                    <option value="ar" {% if lang == 'ar' %}selected{% endif %}>Arabic (العربية)</option>
+                    <option value="zh-CN" {% if lang == 'zh-CN' %}selected{% endif %}>Chinese Simplified (中文)</option>
+                    <option value="ja" {% if lang == 'ja' %}selected{% endif %}>Japanese (日本語)</option>
+                    <option value="ru" {% if lang == 'ru' %}selected{% endif %}>Russian (Русский)</option>
+                    <option value="pt" {% if lang == 'pt' %}selected{% endif %}>Portuguese (Português)</option>
+                    <option value="it" {% if lang == 'it' %}selected{% endif %}>Italiano (Italian)</option>
+                    
+                    <option value="bn" {% if lang == 'bn' %}selected{% endif %}>Bengali (বাংলা)</option>
+                    <option value="nl" {% if lang == 'nl' %}selected{% endif %}>Dutch (Nederlands)</option>
+                    <option value="el" {% if lang == 'el' %}selected{% endif %}>Greek (Ελληνικά)</option>
+                    <option value="id" {% if lang == 'id' %}selected{% endif %}>Indonesian (Bahasa Indonesia)</option>
+                    <option value="ko" {% if lang == 'ko' %}selected{% endif %}>Korean (한국어)</option>
+                    <option value="la" {% if lang == 'la' %}selected{% endif %}>Latin (Lingua Latina)</option>
+                    <option value="mr" {% if lang == 'mr' %}selected{% endif %}>Marathi (मराठी)</option>
+                    <option value="pa" {% if lang == 'pa' %}selected{% endif %}>Punjabi (ਪੰਜਾਬੀ)</option>
+                    <option value="ta" {% if lang == 'ta' %}selected{% endif %}>Tamil (தமிழ்)</option>
+                    <option value="te" {% if lang == 'te' %}selected{% endif %}>Telugu (తెలుగు)</option>
+                    <option value="tr" {% if lang == 'tr' %}selected{% endif %}>Turkish (Türkçe)</option>
+                    <option value="vi" {% if lang == 'vi' %}selected{% endif %}>Vietnamese (Tiếng Việt)</option>
+                </select>
+                
+                <button type="submit" style="width: 100%;">Translate Text</button>
+            </form>
+        </div>
+
+        <div class="pane">
+            <label for="translation_text">Translation Output:</label>
+            <textarea id="translation_text" readonly placeholder="Translation will show here...">{{ translation }}</textarea>
+        </div>
+    </div>
+
+    <div class="footer">Powered by Flask & Deep-Translator Framework</div>
+
+</body>
+</html>
